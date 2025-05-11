@@ -7,29 +7,36 @@ public class trap : RUN
 
 // RUN - контроллер игрока, в нем же и регистрируются столкновения с триггерами
 {
+    public GameObject igra;
+    public RUN rUN;
     public bool ye = false;
     new public void Update()
     {
-        RUN rUN = new RUN();
+        
 
         if (rUN.trap)
         {
-            SceneManager.LoadScene("igra", LoadSceneMode.Additive);
+            SceneManager.LoadScene("saads", LoadSceneMode.Additive);
             Debug.Log(rUN.trap);
             // занружает новую сцену
             StartCoroutine(restart());
             if (ye)
             {
+                igra.SetActive(false);
                 rUN.game.SetActive(false);
                 // выключает старую сцену
             }
+            rUN.trap = false;
         }
     }
     IEnumerator restart()
     {
+        ye = true;
         SceneManager.LoadScene("igra", LoadSceneMode.Additive);
         yield return new WaitForSeconds(1);
-        ye = true;
+        ye = false;
+        
+
 
     }
 }
